@@ -1,0 +1,138 @@
+@font-face {
+    font-family: 'Comodore64';
+    src: url('fonts/Comodore64.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#terminal {
+    font-family: 'Comodore64', monospace;
+    font-size: 16px;
+    background-color: #1c1c1c;
+    width: 100%;
+    height: 100vh;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    color: #ff79c6;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ce4793;
+    text-decoration: underline;
+}
+
+body {
+    font-family: 'Comodore64', monospace;
+    font-size: 16px;
+    color: #abb2bf;
+    background-color: #1c1c1c;
+}
+
+.welcome-message {
+    font-family: 'Comodore64', monospace;
+    font-size: 16px;
+}
+
+.indent {
+    padding-left: 1em;
+    margin-left: 1em;
+    white-space: pre;
+}
+
+.input {
+    font-family: 'Comodore64', monospace;
+    font-size: 16px;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.command-input {
+    font-family: 'Comodore64', monospace;
+    font-size: 16px;
+    color: #2f75f7;
+    caret-color: #2f75f7;
+    width: 50%;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+::selection {
+    color: #ffffff;
+    background-color: #84be37;
+}
+
+.prompt {
+    color: #ffe030;
+    margin-right: 5px;
+}
+
+.executed {
+    font-family: 'Comodore64', monospace;
+    font-size: 16px;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.command-text {
+    color: #2f75f7;
+}
+
+.keyword {
+    font-family: 'Comodore64', monospace;
+    font-size: 16px;
+    color: #fd4860;
+}
+
+.building {
+    color: #a3a3a3;
+}
+
+.car {
+    color: #413488;
+}
+
+.tire {
+    color: #000000;
+}
+
+.mountain {
+    color: #3fca85;
+}
+
+.welcome-name {
+    color: #e79d2e;
+}
+
+.welcome-message {
+    font-family: 'Comodore64', monospace;
+    font-size: 16px;
+}
+
+.output {
+    font-family: 'Comodore64', monospace;
+    font-size: 16px;
+    color: #abb2bf;
+}
+
+::-webkit-scrollbar {
+    width: 15px;
+    height: 100%;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #abb2bf;
+    border: 3px solid #1c1c1c;
+}
