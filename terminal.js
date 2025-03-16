@@ -13,9 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!bottomCheck()) {
             scrollCheck = true;
             clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(() => {
-                scrollCheck = false;
-            }, 60000);
+            scrollTimeout = setTimeout(() => { scrollCheck = false; }, 60000);
         }
         else {
             scrollCheck = false;
@@ -32,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 terminal.scrollTop = terminal.scrollHeight;
             }
             i++;
-            setTimeout(() => linePrinter(html, i, element, buffer, callback), 5);
+            setTimeout(() => linePrinter(html, i, element, buffer, callback), 1);
         } 
         else if (callback) {
             callback();
@@ -40,6 +38,45 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Here, we display our welcome message and use the line printer to display it.
+    function displayWelcomeMessageStart() {
+        const welcomeMessage1 = document.createElement('div');
+        const welcomeMessage2 = document.createElement('div');
+        welcomeMessage1.className = 'welcome-message indent';
+        welcomeMessage2.className = 'welcome-message indent';
+        terminal.appendChild(welcomeMessage1);
+        terminal.appendChild(welcomeMessage2);
+        const welcomeText = 
+`<pre><span class="mountain">                                                               <span class="building">*******</span>
+                                                ~             <span class="building">*---*******</span>
+                                                ~            <span class="building">*-----*******</span>
+                                        ~                   <span class="building">*-------*******</span>
+                                      __      _   <span class="building">_!__</span>     <span class="building">*-------*******</span>
+                                 _   /  \\_  _/ \\  <span class="building">|::| ___</span> <span class="building">**-----********</span>   ~
+                               _/ \\_/^    \\/   ^\\/<span class="building">|::|\\|:|</span>  <span class="building">**---*****</span>/^\\_                   
+                            /\\/  ^ /  ^    / ^ <span class="building">___|::|_|:|__</span>/\\_<span class="building">******</span>/  ^  \\
+                           /  \\  _/ ^ ^   /    <span class="building">|::|--|:|---|</span>  \\__/  ^     ^\\___
+                         _/_^  \\/  ^    _/ ^   <span class="building">|::|::|:|-::|</span> ^ /_  ^    ^  ^   \\_
+                         /   \\^ /    /\\ /      <span class="building">|::|--|:|:--|</span>  /  \\        ^      \\
+                        /     \\/    /  /       <span class="building">|::|::|:|:-:|</span> / ^  \\  ^      ^     \\
+                  <span class="car">_Q</span>   / <span class="car">_Q</span>  <span class="car">_Q _Q</span>  /<span class="car">_Q</span>    <span class="car">_Q</span>  <span class="building">|::|::|:|:::|</span>/    ^ \\     <span class="car">_Q</span>      ^
+                 <span class="car">/_\\)   /_\\)/_/\\\\)  /_\\)  /_\\)</span> <span class="building">|::|::|:|:::|</span>            <span class="car">/_\\)</span>
+                <span class="building">_</span><span class="tire">O|/O</span><span class="building">___</span><span class="tire">O|/O</span><span class="building">_</span><span class="tire">OO|/O</span><span class="building">__</span><span class="tire">O|/O</span><span class="building">__</span><span class="tire">O|/O</span><span class="building">__________________________</span><span class="tire">O|/O</span><span class="building">__________</span>
+                <span class="building">//////////////////////////////////////////////////////////////////////</span></span></pre>`;
+        welcomeMessage1.innerHTML = welcomeText;
+        const helpText = 
+`<pre><span class="welcome-name"> __  __     __  __     __   __     ______   ______     ______        __    __     ______     ______     ______ 
+/\\ \\_\\ \\   /\\ \\/\\ \\   /\\ "-.\\ \\   /\\__  _\\ /\\  ___\\   /\\  == \\      /\\ "-./  \\   /\\  __ \\   /\\  ___\\   /\\__  _\\ 
+\\ \\  __ \\  \\ \\ \\_\\ \\  \\ \\ \\-.  \\  \\/_/\\ \\/ \\ \\  __\\   \\ \\  __<      \\ \\ \\-./\\ \\  \\ \\  __ \\  \\ \\___  \\  \\/_/\\ \\/                                                                                                                  
+ \\ \\_\\ \\_\\  \\ \\_____\\  \\ \\_\\\\"\\_\\    \\ \\_\\  \\ \\_____\\  \\ \\_\\ \\_\\     \\ \\_\\ \\ \\_\\  \\ \\_\\ \\_\\  \\/\\_____\\    \\ \\_\\ 
+  \\/_/\\/_/   \\/_____/   \\/_/ \\/_/     \\/_/   \\/_____/   \\/_/ /_/      \\/_/  \\/_/   \\/_/\\/_/   \\/_____/     \\/_/ </span>
+
+<span class="output">Hello and welcome to my portfolio in a terminal!
+Type '<span class="keyword">help</span>' to get started or for all options!</span></pre>
+`
+        linePrinter(helpText, 0, welcomeMessage2);
+        terminal.appendChild(document.createElement('br'));
+    }
+
     function displayWelcomeMessage() {
         const welcomeMessage = document.createElement('div');
         welcomeMessage.className = 'welcome-message indent';
@@ -156,18 +193,97 @@ GitHub              ~         Link: <a href="https://github.com/HunterCadeMast" 
             `;
         const projectList = 
             `
-Type '<span class="keyword">project[NUMBER]</span>' to get more information on the projects:\n
+Type '<span class="keyword">project[NUMBER]</span>' for a description of a specific project:\n
 
-Quantum Ray Tracer                              ~         Link: <a href="https://github.com/HunterCadeMast/QuantumRayTracer" target="_blank">Project 1</a>\n
-Augmented Reality Comic Book Cover              ~         Link: <a href="https://github.com/HunterCadeMast/ComicBookARCover" target="_blank">Project 2</a>\n
-COOL Compiler                                   ~         Link: <a href="https://github.com/HunterCadeMast/COOLCompiler" target="_blank">Project 3</a>
+Project 1           ~         Link: <a href="https://github.com/HunterCadeMast/QuantumRayTracer" target="_blank">Quantum Ray Tracer</a>\n
+Project 2           ~         Link: <a href="https://github.com/HunterCadeMast/automated-farming" target="_blank">Automated Farming Simulator</a>\n
+Project 3           ~         Link: <a href="https://github.com/HunterCadeMast/DynamicEmotionRecognition" target="_blank">Dynamic Emotion Recognition Software</a>
             `;
-            const aboutResponse = "Hey, I'm Hunter Mast.\n";
+            const aboutResponse =
+            `
+    Hey, I'm <span class="keyword">Hunter Mast</span>. I am an aspiring software engineer with experience in front-end development, compiler construction, 
+augmented reality, quantum computing, and more. I enjoy experiementing with game engines and knowing as much as I can 
+about software as possible. I earned my B.S. in Computer Science at <span class="keyword">Trevecca Nazarene University</span> in 2023 and my 
+M.S. in Computer Science at <span class="keyword">Vanderbilt University</span> in 2024. Some of my personal interests include playing guitar, 
+skateboarding, collecting comic books, listening to a variety of music (Primarily rock), and playing video games such 
+as Final Fantasy and The Legend of Zelda.
+            `;
             const emailResponse = "Email            ~         HunterCadeMast@gmail.com";
-            const experienceResponse = "Experience";
-            const project1Response = "Project 1";
-            const project2Response = "Project 2";
-            const project3Response = "Project 3";
+            const experienceResponse =
+            `
+    My professional experience comes primarily from my internship as Firefly Integrations LLC as a <span class="keyword">Software Engineering Intern</span>.
+At Firefly, my role was to collaborate with a team to implement front-end interfaces for LCD screens inside of a variety of RV coaches 
+from clients such as Thor, Entegra, Renegage, Coachmen, Jayco, etc. Additionally, I reviewed peers' code to provide constructive feedback 
+for quality assurance and functionality. I gained experience in JavaScript, AWS, Git, and CAN bus in a professional setting. 
+
+    More on the IT route, I have professional experience as an <span class="keyword">IT Support Consultant</span> at Trevecca Nazarene University. As a 
+support consultant, my role was to manage a multitude of different areas on Trevecca's campus to support the learning infrastructure 
+such as classroom technology, network, and security. I would provide technical support both with students and professors.
+Mangage accounts, tickets, network related issues, and any question clients had both over call and in person. I gained experience 
+in Microsoft Azure, SharePoint, Panopto, Crestron, HappyFox, and Blackboard Learn.
+
+<span class="keyword">Programming Languages</span>:
+    ~ Python (NumPy, PyTorch, Qiskit)
+    ~ C++
+    ~ JavaScript (NodeJS, Playwright)
+    ~ C#
+    ~ Rust
+    ~ Scala
+    ~ SQL
+    ~ HTML Prolog
+    ~ Racket
+
+<span class="keyword">Hard Skills</span>:
+    ~ Algorithms and Data Structures
+    ~ Operating Systems
+    ~ Networking
+    ~ Cyber Security
+    ~ Compiler Construction
+    ~ Quantum Computing
+    ~ Deep-Learning
+    ~ Extended Mathematical Programming
+    ~ Model Integrated Computing
+    ~ Hybrid and Embedded Systems
+    ~ Augmented Reality
+    ~ Unity Engine
+    ~ Unreal Engine
+
+<span class="keyword">Soft Skills</span>:
+    ~ Adaptability
+    ~ Analytical Thinking
+    ~ Attention to Detail
+    ~ Collaboration
+    ~ Communication
+    ~ Technical Support
+            `;
+            const project1Response = 
+            `
+    Project 1, my <span class="keyword">Quantum Ray Tracer</span>, was created for my '<span class="keyword">Quantum Computing</span>' class at Vanderbilt University. The goal was to 
+recreate a ray tracer with quantum computing elements that hopefully is more efficient than a normal ray tracer. I had started 
+with a basic ray tracer that was not working correctly and fixed some lighting errors. From there, I attempted to create a 
+quantum ray tracer using '<span class="keyword">Qiskit</span>'. I was successful in creating a somewhat efficient ray tracer and additionally a Monte Carlo 
+ray tracer using similar quantum computing ideas. Overall, I believe this shows a lot of my problem solving skills and diversity
+in my knowledge. While I may not need to use quantum computing techniques for most jobs, I was able to adapt and create a project
+using a variety of techniques, both from quantum computing and from other classes.
+            `;
+            const project2Response = 
+            `
+    Project 2, my <span class="keyword">Automated Farming Simulator</span>, was created for my '<span class="keyword">Hybrid and Embedded Systems</span>' class at Vanderbilt University. 
+For my project, I had started with trying to create a fully automated vehicle state machine for farming. I was shown a lot 
+of the complexity of such a system. In the GitHub repo, are the instructions to run the program and some of the commands that 
+are being called for each state. Descriptions of each state are included. Overall, I believe this shows a lot of my work with 
+automation and attempting to use complex algorithms, such as Monte Carlo's algorithm, in a project. It shows a lot of thought 
+that went into making sure this sort of system would be reliable, safe, and optimal.
+            `;
+            const project3Response = 
+            `
+    Project 3, my <span class="keyword">Dynamic Emotion Recognition Software</span>, was created for my '<span class="keyword">Deep Learning</span>' class at Vanderbilt University.
+This was a group project for optimizing EfficientNet with LSTM for Dynamic Emotion Recognition from video. Collaborators consists of 
+Celestine Akpanoko, Alex Esser, Srikanth Narayanan, Chang-Yong Song, and myself. In the repo, there is both a paper written by us and 
+a presentation that goes over our motivation, data sets used, architecture, and results. We initially proposed an approach for 
+facial emotion recognition (FER) that would utilize a hybrid model that combines LSTM netowrks with pre-trained EfficientNet architecture. 
+Overall, I believe this shows a lot of my collaboration skills and my knowledge in more complex fields such as machine learning.
+            `;
         if (lowerCommand === 'clear') {
             terminal.innerHTML = "";
         }
@@ -226,6 +342,6 @@ COOL Compiler                                   ~         Link: <a href="https:/
             terminal.scrollTop = terminal.scrollHeight;
         }
     }
-    displayWelcomeMessage();
+    displayWelcomeMessageStart();
     commandLine();
 });
