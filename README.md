@@ -1,4 +1,4 @@
-# Hunter Mast Terminal Portfolio @ https://huntercademast.github.io/
+# Terminal Portfolio @ https://huntercademast.github.io/
 
 An **terminal-simulated portfolio website** showcasing my projects, experience, and contact info in a command-line interface.
 This project replicates a terminal experience using **HTML, CSS, and JavaScript**, complete with ASCII art, typing animation, and command execution.
